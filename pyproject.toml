@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apex-jev"
+version = "0.0.1"
+description = "APEX-JEV: adaptive trading intelligence & research platform for XAUUSD. Maturity level 0: data foundation."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+  "pandas>=2.1,<3",
+  "numpy>=1.26",
+  "pyarrow>=14",
+  "pyyaml>=6",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4",
+  "hypothesis>=6.90",
+  "ruff>=0.4",
+  "duckdb>=0.10",
+]
+
+[project.scripts]
+apex-data = "apex_jev.data.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "W"]
